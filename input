@@ -1,0 +1,7 @@
+request_spot Ford_Expedition
+assign_spot 201
+pass_time 3
+assign_spot 101
+pass_time 4
+checkout 201
+checkout 101

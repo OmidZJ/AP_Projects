@@ -18,13 +18,23 @@ void assign_spot(string temp);
 void checkout(string temp);
 void pass_time(string temp);
 void update_costs();
-void initializing();
+void initializing(string icars, string iparking, string ipcosts);
 
-int main()
+int main(int argc, char* argv[])
 {
+    // بررسی اینکه دقیقا 4 آرگومان وارد شده باشد (اسم برنامه و سه آرگومان)
+    if (argc != 4) {
+        cerr << "Usage: " << argv[0] << " param1 param2 param3" << endl;
+        return 1;
+    }
+
+    cout << "Param 1: " << argv[1] << endl;
+    cout << "Param 2: " << argv[2] << endl;
+    cout << "Param 3: " << argv[3] << endl;
+
     string command, temp;
 
-    initializing();
+    initializing(argv[1],argv[2],argv[3]);
 
     while (cin >> command)
     {
@@ -186,11 +196,11 @@ void update_costs()
     }
 }
 
-void initializing()
+void initializing(string icars, string iparking, string ipcosts)
 {
-    cars = readFromFile("cars", cars);
+    cars = readFromFile(icars, cars);
 
-    parking = readFromFile("parking", parking);
+    parking = readFromFile(iparking, parking);
     for (auto i : parking)
     {
         parking[i.first].push_back("0"); // for empty
@@ -198,7 +208,7 @@ void initializing()
         parking[i.first].push_back("0"); // for days
     }
 
-    pcosts = readFromFile("costs", pcosts);
+    pcosts = readFromFile(ipcosts, pcosts);
     ppcosts = pcosts;
     costs["normal"] = pcosts;
 

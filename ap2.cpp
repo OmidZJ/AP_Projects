@@ -8,7 +8,8 @@
 using namespace std;
 const char delimiter = ',';
 
-map<string, vector<string>> cars, parking, costs;
+map<string, vector<string>> cars, parking, pcosts, ppcosts;
+map<string, map<string, vector<string>>> costs;
 
 vector<string> split(const string &str);
 map<string, vector<string>> readFromFile(const string &filename, map<string, vector<string>> maptemp);
@@ -132,8 +133,10 @@ void request_spot(string temp)
         {
             id = place.first;
             type = place.second[1];
-            static_price = costs[size][0];
-            price_per_day = costs[size][1];
+
+            static_price = costs[type][size][0];
+            price_per_day = costs[type][size][1];
+
             cout << id << ": " << type << " " << static_price << " " << price_per_day << "\n";
         }
     }
@@ -178,7 +181,7 @@ void update_costs()
     {
         if (i.second[2] == "1")
         {
-            parking[i.first][3] = to_string(stoi(costs[i.second[0]][0]) + stoi(costs[i.second[0]][1]) * stoi(i.second[4]));
+            parking[i.first][3] = to_string(stoi(costs[i.second[1]][i.second[0]][0]) + stoi(costs[i.second[1]][i.second[0]][1]) * stoi(i.second[4]));
         }
     }
 }
@@ -195,5 +198,15 @@ void initializing()
         parking[i.first].push_back("0"); // for days
     }
 
-    costs = readFromFile("costs", costs);
+    pcosts = readFromFile("costs", pcosts);
+    ppcosts = pcosts;
+    costs["normal"] = pcosts;
+
+    for (auto i : pcosts)
+    {
+        pcosts[i.first] = {to_string(stoi(i.second[0]) + 50), to_string(stoi(i.second[1]) + 30)};
+        ppcosts[i.first] = {to_string(stoi(i.second[0]) + 80), to_string(stoi(i.second[1]) + 60)};
+    }
+    costs["covered"] = pcosts;
+    costs["CCTV"] = ppcosts;
 }

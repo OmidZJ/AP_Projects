@@ -20,16 +20,17 @@ void pass_time(string temp);
 void update_costs();
 void initializing(string icars, string iparking, string ipcosts);
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-    if (argc != 4) {
+    if (argc != 4)
+    {
         cerr << "Usage: " << argv[0] << " param1 param2 param3" << endl;
         return 1;
     }
 
     string command, temp;
 
-    initializing(argv[1],argv[2],argv[3]);
+    initializing(argv[1], argv[2], argv[3]);
 
     while (cin >> command)
     {
@@ -79,7 +80,6 @@ vector<string> split(const string &str)
         }
     }
 
-    
     if (!temp.empty())
     {
         result.push_back(temp);
@@ -112,16 +112,7 @@ map<string, vector<string>> readFromFile(const string &filename, map<string, vec
         maptemp[row[0]] = temp;
     }
 
-    for (auto name : maptemp)
-    {
-        cout << name.first << " ";
-        for (auto value : name.second)
-        {
-            cout << value << " ";
-        }
-        cout << endl;
-    }
-    // cars.clear();
+
 
     file.close(); // Close the file
     return maptemp;

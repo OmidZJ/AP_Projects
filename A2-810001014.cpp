@@ -100,7 +100,7 @@ map<string, vector<string>> readFromFile(const string &filename, map<string, vec
         return {};
     }
 
-    // Read the file line by line
+    getline(file, line);
     while (getline(file, line))
     {
         vector<string> row, temp;

@@ -1,3 +1,6 @@
-101,1,normal
-301,2,covered
-201,3,CCTV
+id,size,type
+14,1,normal
+21,2,CCTV
+37,3,covered
+48,2,normal
+59,1,covered
